@@ -4,7 +4,8 @@ node_modules/
 .pnp.js
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
+# Keep pnpm-lock.yaml (it should be committed!)
+# pnpm-lock.yaml
 
 # Python
 __pycache__/
