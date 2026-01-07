@@ -1,0 +1,116 @@
+version: '3.9'
+
+services:
+  # PostgreSQL with pgvector for semantic search
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: ecoimmo-postgres
+    environment:
+      POSTGRES_USER: ecoimmo
+      POSTGRES_PASSWORD: ecoimmo_dev_2026
+      POSTGRES_DB: ecoimmo_france
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=fr_FR.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecoimmo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecoimmo-network
+
+  # Redis for API response caching (French Gov rate limits)
+  redis:
+    image: redis:7-alpine
+    container_name: ecoimmo-redis
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - ecoimmo-network
+
+  # FastAPI Backend (Python 3.13)
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: ecoimmo-api
+    environment:
+      - DATABASE_URL=postgresql://ecoimmo:ecoimmo_dev_2026@postgres:5432/ecoimmo_france
+      - REDIS_URL=redis://redis:6379/0
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - DVF_API_URL=https://data.economie.gouv.fr/api/v2/catalog/datasets/dvf/records
+      - ADEME_DPE_API_URL=https://data.ademe.fr/data-fair/api/v1/datasets/dpe-v2-logements-existants
+      - ELECTRICITY_CONVERSION_FACTOR=1.9
+      - GDPR_ANONYMIZATION_LEVEL=postal_code
+      - EU_AI_ACT_COMPLIANCE=true
+      - PYTHON_ENV=development
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/api:/app
+      - /app/__pycache__
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - ecoimmo-network
+
+  # Next.js Frontend (Next.js 16 with Turbopack)
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: ecoimmo-web
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+      - NEXT_PUBLIC_MISTRAL_KEY=${NEXT_PUBLIC_MISTRAL_KEY}
+      - NEXT_TELEMETRY_DISABLED=1
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - api
+    command: npm run dev:turbo
+    networks:
+      - ecoimmo-network
+
+  # Adminer for database management
+  adminer:
+    image: adminer:latest
+    container_name: ecoimmo-adminer
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - ecoimmo-network
+
+networks:
+  ecoimmo-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
