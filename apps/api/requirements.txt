@@ -1,51 +1,78 @@
-# EcoImmo France 2026 - FastAPI Backend Requirements
-# Python 3.13 compatible
-
-# Web Framework
-fastapi==0.115.0
-uvicorn[standard]==0.31.0
-pydantic==2.9.2
-pydantic-settings==2.6.0
-
-# Async HTTP client
-aiohttp==3.10.10
-httpx==0.27.2
-
-# Database
-asyncpg==0.30.0
-sqlalchemy[asyncio]==2.0.36
-alembic==1.14.0
-
-# Redis (async)
-redis[hiredis]==5.2.0
-
-# Vector database (pgvector)
-pgvector==0.3.6
 
 # AI/ML
-mistralai==1.2.4
-sentence-transformers==3.3.1
-numpy==2.1.3
-
+# AI/ML Dependencies for "AI Property Doctor"
+# Advanced computer vision, forecasting, and NLP
+# Async HTTP client
+# Computer Vision (for property analysis from photos)
+# Core ML frameworks
 # Data validation & serialization
-python-multipart==0.0.18
-email-validator==2.2.0
-
-# Utilities
-python-dotenv==1.0.1
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-
+# Database
+# Development
+# EcoImmo France 2026 - FastAPI Backend Requirements
+# French NLP (CamemBERT)
+# Geospatial analysis
+# Image generation (renovation renders)
+# Monitoring & Logging
+# PDF generation (for reports)
+# Python 3.13 compatible
+# Redis (async)
+# Scientific computing
 # Testing
-pytest==8.3.4
+# Time series forecasting
+# Utilities
+# Vector database (pgvector)
+# Visualization
+# Web Framework
+accelerate==1.2.1
+aiohttp==3.10.10
+alembic==1.14.0
+asyncpg==0.30.0
+black==24.10.0
+catboost==1.2.7
+diffusers==0.32.1
+email-validator==2.2.0
+fastapi==0.115.0
+folium==0.18.0
+geopandas==1.0.1
+httpx==0.27.2
+httpx==0.27.2  # For testing FastAPI
+lightgbm==4.5.0
+matplotlib==3.9.3
+mistralai==1.2.4
+mypy==1.13.0
+numpy==2.1.3
+opencv-python==4.10.0.84
+pandas==2.2.3
+passlib[bcrypt]==1.7.4
+pgvector==0.3.6
+pillow==11.0.0
+plotly==5.24.1
+prophet==1.1.6
+pydantic-settings==2.6.0
+pydantic==2.9.2
+pypdf2==3.0.1
 pytest-asyncio==0.24.0
 pytest-cov==6.0.0
-httpx==0.27.2  # For testing FastAPI
-
-# Development
-black==24.10.0
+pytest==8.3.4
+python-dotenv==1.0.1
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.18
+redis[hiredis]==5.2.0
+reportlab==4.2.5
 ruff==0.8.4
-mypy==1.13.0
-
-# Monitoring & Logging
+scikit-learn==1.6.0
+scipy==1.14.1
+seaborn==0.13.2
+sentence-transformers==3.3.1
+sentencepiece==0.2.0
+shapely==2.0.6
+sqlalchemy[asyncio]==2.0.36
+statsmodels==0.14.4
 structlog==24.4.0
+tokenizers==0.21.0
+torch==2.5.1
+torchvision==0.20.1
+transformers==4.47.1
+ultralytics==8.3.41  # YOLO for object detection
+uvicorn[standard]==0.31.0
+xgboost==2.1.3
