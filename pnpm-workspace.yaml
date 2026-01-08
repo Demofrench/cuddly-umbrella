@@ -1,0 +1,17 @@
+# pnpm workspace configuration for EcoImmo France 2026
+# Optimized for monorepo performance with Turborepo
+
+packages:
+  # Applications
+  - 'apps/*'
+
+  # Shared packages
+  - 'packages/*'
+
+# Exclude common directories
+exclude:
+  - '**/node_modules/**'
+  - '**/dist/**'
+  - '**/.next/**'
+  - '**/build/**'
+  - '**/.turbo/**'

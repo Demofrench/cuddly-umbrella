@@ -25,7 +25,7 @@ from fastapi.responses import JSONResponse
 import uvicorn
 
 from app.config.settings import settings
-from app.routers import properties, analytics, ai_insights, gdpr
+from app.routers import properties, analytics, ai_insights, gdpr, ai_property_doctor
 from app.services.french_gov_data_fetcher import FrenchGovDataFetcher
 
 # Configure logging
@@ -248,6 +248,7 @@ app.include_router(properties.router, prefix="/api/v1/properties", tags=["proper
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
 app.include_router(ai_insights.router, prefix="/api/v1/ai-insights", tags=["ai-insights"])
 app.include_router(gdpr.router, prefix="/api/v1/gdpr", tags=["gdpr"])
+app.include_router(ai_property_doctor.router, prefix="/api/v1/ai-doctor", tags=["🏥 AI Property Doctor"])
 
 
 # Dependency injection helper
