@@ -88,7 +88,7 @@ services:
       - /app/.next
     depends_on:
       - api
-    command: npm run dev:turbo
+    command: pnpm dev:turbo
     networks:
       - ecoimmo-network
 

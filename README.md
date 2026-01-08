@@ -2,9 +2,10 @@
 
 > 🇫🇷 High-performance real estate analysis platform for the French market with advanced energy performance diagnostics
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-green.svg)](https://gdpr.eu/)
 [![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Compliant-green.svg)](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://pnpm.io/)
 
 ## 📋 Table of Contents
 
@@ -171,7 +172,7 @@ EcoImmo France 2026
 
 ### Prerequisites
 
-- Node.js 18.17+ and npm 9+
+- Node.js 18.17+ and pnpm 9+
 - Python 3.13+
 - Docker & Docker Compose
 - Git
@@ -196,8 +197,8 @@ cp .env.example .env
 ### 3. Install Dependencies
 
 ```bash
-# Install Node.js dependencies
-npm install
+# Install Node.js dependencies with pnpm (3x faster than npm!)
+pnpm install
 
 # Install Python dependencies
 cd apps/api
@@ -234,7 +235,7 @@ uvicorn app.main:app --reload --port 8000
 **Terminal 3 - Next.js Frontend:**
 ```bash
 cd apps/web
-npm run dev:turbo  # Uses Turbopack for faster builds
+pnpm dev:turbo  # Uses Turbopack for faster builds
 ```
 
 ### 6. Access the Application
@@ -457,26 +458,26 @@ Visit **http://localhost:8000/docs** for interactive Swagger UI documentation.
 
 ```bash
 # Development
-npm run dev              # Start all services (Turbo)
-npm run dev:web          # Start Next.js only
-npm run dev:api          # Start FastAPI only
+pnpm dev              # Start all services (Turbo)
+pnpm dev:web          # Start Next.js only
+pnpm dev:api          # Start FastAPI only
 
 # Build
-npm run build            # Build all apps
+pnpm build            # Build all apps
 
 # Testing
-npm run test             # Run all tests
-npm run test:api         # Run Python tests (pytest)
+pnpm test             # Run all tests
+pnpm test:api         # Run Python tests (pytest)
 
 # Code Quality
-npm run lint             # Lint all code
-npm run type-check       # TypeScript type checking
-npm run format           # Format with Prettier
+pnpm lint             # Lint all code
+pnpm type-check       # TypeScript type checking
+pnpm format           # Format with Prettier
 
 # Docker
-npm run docker:up        # Start Docker services
-npm run docker:down      # Stop Docker services
-npm run docker:logs      # View logs
+pnpm docker:up        # Start Docker services
+pnpm docker:down      # Stop Docker services
+pnpm docker:logs      # View logs
 ```
 
 ### Running Tests
@@ -491,14 +492,14 @@ pytest --cov=app tests/
 **Frontend (TypeScript):**
 ```bash
 cd apps/web
-npm run test
+pnpm test
 ```
 
 ### Code Formatting
 
 ```bash
 # Format all code
-npm run format
+pnpm format
 
 # Backend only (Black + Ruff)
 cd apps/api
@@ -525,7 +526,14 @@ EcoImmo France 2026 follows green coding practices:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](./LICENSE) file for details.
+
+**Why Apache 2.0?**
+- ✅ Patent protection for users and contributors
+- ✅ Enterprise-friendly and widely trusted
+- ✅ Aligns with Mistral AI's open-source license
+- ✅ Better for government and commercial use
+- ✅ More comprehensive than MIT
 
 ## 🙏 Acknowledgments
 
