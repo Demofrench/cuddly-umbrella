@@ -151,10 +151,11 @@ EcoImmo France 2026
 ## 🛠 Tech Stack
 
 ### Frontend (2026 Industry Standards)
-- **Next.js 16** with Turbopack (faster builds)
-- **React 19** with React Compiler (automatic memoization)
+- **Next.js 16.1** with Turbopack (70% faster dev builds)
+- **React 19.2** with React Compiler (automatic memoization)
 - **Tailwind CSS 4.0** + Shadcn/UI
 - **TypeScript 5.7**
+- **Node.js 24 LTS** (Krypton) or Node.js 22 LTS (Jod)
 - French DSFR design principles
 
 ### Backend
@@ -172,10 +173,11 @@ EcoImmo France 2026
 
 ### Prerequisites
 
-- Node.js 18.17+ and pnpm 9+
-- Python 3.13+
-- Docker & Docker Compose
-- Git
+- **Node.js 22+** (LTS "Jod") or **Node.js 24+** (LTS "Krypton" - recommended)
+- **pnpm 9+**
+- **Python 3.13+**
+- **Docker & Docker Compose**
+- **Git**
 
 ### 1. Clone the Repository
 
